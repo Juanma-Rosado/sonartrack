@@ -3,14 +3,24 @@ import Image from "next/image";
 
 interface TrackCardProps {
   track: SpotifyTrack;
+  /** Posición en el ranking (1 = primera). Si no se pasa, no se muestra número. */
+  rank?: number;
 }
 
-export function TrackCard({ track }: TrackCardProps) {
+export function TrackCard({ track, rank }: TrackCardProps) {
   const cover = track.album.images?.[0];
   const artistNames = track.artists.map((a) => a.name).join(", ");
 
   return (
     <article className="flex items-center gap-4 rounded-xl border border-zinc-800/80 bg-zinc-950/60 p-3 shadow-sm shadow-black/40 transition-colors hover:border-zinc-500/80">
+      {rank != null && (
+        <span
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-zinc-800/80 text-sm font-bold tabular-nums text-zinc-300 ring-1 ring-zinc-700/80"
+          aria-label={`Posición ${rank}`}
+        >
+          {rank}
+        </span>
+      )}
       {cover && (
         <div className="relative h-14 w-14 overflow-hidden rounded-lg bg-zinc-900">
           <Image

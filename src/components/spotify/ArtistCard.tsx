@@ -3,13 +3,23 @@ import Image from "next/image";
 
 interface ArtistCardProps {
   artist: SpotifyArtist;
+  /** Posición en el ranking (1 = primero). Si no se pasa, no se muestra número. */
+  rank?: number;
 }
 
-export function ArtistCard({ artist }: ArtistCardProps) {
+export function ArtistCard({ artist, rank }: ArtistCardProps) {
   const image = artist.images?.[0];
 
   return (
     <article className="flex items-center gap-4 rounded-xl border border-zinc-800/80 bg-zinc-950/60 p-3 shadow-sm shadow-black/40 transition-colors hover:border-zinc-500/80">
+      {rank != null && (
+        <span
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-zinc-800/80 text-sm font-bold tabular-nums text-zinc-300 ring-1 ring-zinc-700/80"
+          aria-label={`Posición ${rank}`}
+        >
+          {rank}
+        </span>
+      )}
       {image && (
         <div className="relative h-14 w-14 overflow-hidden rounded-full bg-zinc-900">
           <Image

@@ -226,9 +226,9 @@ export default function Home() {
               )}
 
               {!loadingData && data?.topTracks && data.topTracks.length > 0 && (
-                <div className="grid gap-3 md:grid-cols-2">
-                  {data.topTracks.slice(0, 10).map((track) => (
-                    <TrackCard key={track.id} track={track} />
+                <div className="flex flex-col gap-2">
+                  {data.topTracks.slice(0, 10).map((track, index) => (
+                    <TrackCard key={track.id} track={track} rank={index + 1} />
                   ))}
                 </div>
               )}
@@ -253,8 +253,8 @@ export default function Home() {
 
                 {!loadingData && data?.topArtists && data.topArtists.length > 0 && (
                   <div className="space-y-2">
-                    {data.topArtists.slice(0, 6).map((artist) => (
-                      <ArtistCard key={artist.id} artist={artist} />
+                    {data.topArtists.slice(0, 6).map((artist, index) => (
+                      <ArtistCard key={artist.id} artist={artist} rank={index + 1} />
                     ))}
                   </div>
                 )}
